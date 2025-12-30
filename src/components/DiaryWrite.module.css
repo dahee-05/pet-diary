@@ -1,0 +1,34 @@
+.container {
+  margin: 50px 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid green; */
+}
+
+.textArea {
+  width: 500px;
+  height: 400px;
+  padding: 20px 30px;
+}
+
+.textArea:focus {
+  outline: none;
+}
+
+.info {
+  width: 68%;
+  text-align: right;
+  font-size: 13px;
+}
+
+.isCounting {
+  color: red;
+}
+
+.btn {
+  display: flex;
+  gap: 10px;
+  margin: 10px;
+}

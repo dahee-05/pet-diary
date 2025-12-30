@@ -1,0 +1,31 @@
+.writeBtn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.active {
+  border: 2px solid rgb(6, 149, 75);
+}
+
+.opacity {
+  opacity: 0.4;
+}
+
+.submitBtn,
+.createDiary {
+  padding: 10px 50px;
+  border: none;
+  border-radius: 8px;
+}
+
+.createDiary {
+  padding: 15px;
+  width: 740px;
+  color: #ffffff;
+  background-color: rgb(232, 214, 223);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
