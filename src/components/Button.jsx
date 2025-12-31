@@ -15,9 +15,10 @@ export default function Button({
       type={type}
       value={value}
       onClick={() => onClick?.(value)}
-      className={`${styles[className]} 
+      className={`${styles[className]}
       ${active ? styles.active : ""}
-      ${opacity ? styles.opacity : ""}`}
+      ${opacity ? styles.opacity : ""}
+      ${rest.disabled ? styles.opacity : styles.opaque}`}
       {...rest}
     >
       {value}

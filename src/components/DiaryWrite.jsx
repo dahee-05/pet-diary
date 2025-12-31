@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import styles from "./DiaryWrite.module.css";
 import Button from "./Button.jsx";
+import dog from "../assets/dog.jpeg";
+import cat from "../assets/cat.jpeg";
 
 const CONTENT_MAX_LENGTH = 500;
 
@@ -9,11 +11,19 @@ export default function DiaryWritePage() {
   const textRef = useRef();
   const navigate = useNavigate();
 
-  const [item, setItem] = useState({ id: 0, type: "", content: "", date: "" });
   const [list, setList] = useState(
     JSON.parse(localStorage.getItem("list")) || []
   );
-  const isCounting = item.content.length > CONTENT_MAX_LENGTH;
+  const [item, setItem] = useState({
+    id: 0,
+    type: "",
+    img: "",
+    date: "",
+    myMessage: "",
+    otherMessage: "",
+  });
+
+  const isCounting = item.myMessage.length > CONTENT_MAX_LENGTH;
   const date = new Date();
   const formattedDate =
     date.getFullYear() +
@@ -21,7 +31,7 @@ export default function DiaryWritePage() {
     (date.getMonth() + 1) +
     "-" +
     date.getDate() +
-    " " +
+    "  " +
     date.getHours() +
     ":" +
     date.getMinutes() +
@@ -30,7 +40,7 @@ export default function DiaryWritePage() {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setItem((prev) => ({ ...prev, content: value }));
+    setItem((prev) => ({ ...prev, myMessage: value }));
   };
 
   const handleClick = (type) => {
@@ -41,8 +51,12 @@ export default function DiaryWritePage() {
     e.preventDefault();
 
     const maxId = list.reduce((max, data) => Math.max(max, data.id), 0);
-    const newItem = { ...item, id: maxId + 1, date: formattedDate };
-    console.log("1.--->", newItem);
+    const newItem = {
+      ...item,
+      id: maxId + 1,
+      date: formattedDate,
+      img: item.type === "강아지" ? dog : cat,
+    };
     setItem((prev) => ({ ...prev, newItem }));
     navigate("/trans", { state: { item: newItem } });
   };
@@ -52,11 +66,11 @@ export default function DiaryWritePage() {
       <textarea
         className={styles.textArea}
         ref={textRef}
-        value={item.content}
+        value={item.myMessage}
         onChange={(e) => handleChange(e)}
       />
       <p className={`${styles.info} ${isCounting ? styles.isCounting : ""}`}>
-        500자 이내로 입력하세요. [{item.content.length}/500]{" "}
+        500자 이내로 입력하세요. [{item.myMessage.length}/500]{" "}
       </p>
       <div className={styles.btn}>
         <Button
@@ -80,7 +94,7 @@ export default function DiaryWritePage() {
         type="submit"
         value={"생성"}
         className="submitBtn"
-        disabled={item.content.trim() === "" || isCounting}
+        disabled={item.myMessage.trim() === "" || isCounting}
       />
     </form>
   );
