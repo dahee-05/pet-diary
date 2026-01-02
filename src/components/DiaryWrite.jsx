@@ -68,20 +68,18 @@ export default function DiaryWritePage() {
   };
 
   const sendMessage = async (myMessage, type) => {
+    const url = "https://api.openai.com/v1/responses";
+    const data = {
+      model: "gpt-4.1-nano",
+      input: `너는 ${type}야. 입력한 하루 상황을 바탕으로 동물의 입장에서 왜 그런 행동을 했는지, 그리고 오늘 하루 느낀 감정, 신체 상태를 2~4문장으로 귀엽게 설명해줘. 오늘 상황 ${myMessage}`,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE__OPENAI_KEY}`,
+    };
+
     try {
-      const res = await axios.post(
-        "https://api.openai.com/v1/responses",
-        {
-          model: "gpt-4.1-nano",
-          input: `너는 ${type}야. 사용자가 입력한 하루 상황을 바탕으로 동물의 입장에서 느낀 감정과 신체 상태를 2~3문장으로 귀엽게 설명해줘. 오늘 상황 ${myMessage}`,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE__OPENAI_KEY}`,
-          },
-        }
-      );
+      const res = await axios.post(url, data, { headers });
       return res.data.output[0].content[0].text;
     } catch (error) {
       console.log(error);
