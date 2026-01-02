@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import OpenAI from "openai";
 import styles from "./DiaryWrite.module.css";
 import Button from "./Button.jsx";
 import dog from "../assets/dog.jpeg";
@@ -22,6 +24,8 @@ export default function DiaryWritePage() {
     myMessage: "",
     otherMessage: "",
   });
+
+  // const key = import.meta.env.VITE__OPENAI_KEY;
 
   const isCounting = item.myMessage.length > CONTENT_MAX_LENGTH;
   const date = new Date();
@@ -47,18 +51,41 @@ export default function DiaryWritePage() {
     setItem((prev) => ({ ...prev, type: prev.type === type ? "" : type }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const maxId = list.reduce((max, data) => Math.max(max, data.id), 0);
+    const aiResult = await sendMessage(item.myMessage, item.type);
     const newItem = {
       ...item,
       id: maxId + 1,
       date: formattedDate,
       img: item.type === "강아지" ? dog : cat,
+      otherMessage: aiResult,
     };
     setItem((prev) => ({ ...prev, newItem }));
     navigate("/trans", { state: { item: newItem } });
+  };
+
+  const sendMessage = async (myMessage, type) => {
+    try {
+      const res = await axios.post(
+        "https://api.openai.com/v1/responses",
+        {
+          model: "gpt-4.1-nano",
+          input: `너는 ${type}야. 사용자가 입력한 하루 상황을 바탕으로 동물의 입장에서 느낀 감정과 신체 상태를 2~3문장으로 귀엽게 설명해줘. 오늘 상황 ${myMessage}`,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE__OPENAI_KEY}`,
+          },
+        }
+      );
+      return res.data.output[0].content[0].text;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

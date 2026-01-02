@@ -11,17 +11,11 @@ export default function TranslationPage() {
     JSON.parse(localStorage.getItem("list")) || []
   );
 
-  useEffect(() => {
-    // localStorage.setItem("list", JSON.stringify([...list, item]));
-  }, []);
-
   const hadleRetry = () => {
-    console.log("다시하기");
     navigate("/write");
   };
 
   const handleSubmit = () => {
-    console.log("저장하기");
     localStorage.setItem("list", JSON.stringify([...list, item]));
     navigate("/");
   };
@@ -31,7 +25,7 @@ export default function TranslationPage() {
       <img className={styles.img} src={item.img} />
       <textarea
         className={styles.textArea}
-        value={item.myMessage}
+        value={item.otherMessage}
         onChange={(e) => handleChange(e)}
       />
       <div className={styles.btn}>

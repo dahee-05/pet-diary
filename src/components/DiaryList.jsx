@@ -32,7 +32,7 @@ export default function DiaryList() {
               <div className={styles.content}>
                 <img src={item.img} className={styles.img} />
                 <div className={styles.diary}>
-                  {truncate(item.myMessage, 25)}
+                  {truncate(item.otherMessage, 25)}
                 </div>
               </div>
               <div className={styles.date}>{item.date} </div>
