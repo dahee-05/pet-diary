@@ -25,8 +25,6 @@ export default function DiaryWritePage() {
     otherMessage: "",
   });
 
-  // const key = import.meta.env.VITE__OPENAI_KEY;
-
   const isCounting = item.myMessage.length > CONTENT_MAX_LENGTH;
   const date = new Date();
   const formattedDate =
