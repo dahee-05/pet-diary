@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import styles from "./TranslationPage.module.css";
+import styles from "../css/TranslationPage.module.css";
 import Button from "./Button.jsx";
 
 export default function TranslationPage() {

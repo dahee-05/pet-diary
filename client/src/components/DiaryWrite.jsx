@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import OpenAI from "openai";
-import styles from "./DiaryWrite.module.css";
+import styles from "../css/DiaryWrite.module.css";
 import Button from "./Button.jsx";
 import dog from "../assets/dog.jpeg";
 import cat from "../assets/cat.jpeg";
@@ -17,7 +17,7 @@ export default function DiaryWritePage() {
     JSON.parse(localStorage.getItem("list")) || []
   );
   const [item, setItem] = useState({
-    id: 0,
+    num: 0,
     type: "",
     img: "",
     date: "",
@@ -52,11 +52,11 @@ export default function DiaryWritePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const maxId = list.reduce((max, data) => Math.max(max, data.id), 0);
+    const maxId = list.reduce((max, data) => Math.max(max, data.num), 0);
     const aiResult = await sendMessage(item.myMessage, item.type);
     const newItem = {
       ...item,
-      id: maxId + 1,
+      num: maxId + 1,
       date: formattedDate,
       img: item.type === "강아지" ? dog : cat,
       otherMessage: aiResult,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./DiaryList.module.css";
+import styles from "../css/DiaryList.module.css";
 import Button from "./Button.jsx";
 
 export default function DiaryList() {

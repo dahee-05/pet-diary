@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./Button.module.css";
+import styles from "../css/Button.module.css";
 
 export default function Button({
   type,
