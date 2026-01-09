@@ -11,7 +11,7 @@ export default function DiaryList() {
   const handleClick = async () => {
     navigate("/write");
   };
-  ``;
+
   const truncate = (str, n) => {
     return str?.length > n ? str.slice(0, n) + "..." : str;
   };

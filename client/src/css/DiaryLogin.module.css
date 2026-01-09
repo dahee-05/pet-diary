@@ -76,6 +76,21 @@
   color: #ffffff;
   background-color: rgb(184, 103, 144);
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+}
+
+.snsBtn {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.snsBtn button {
+  border: none;
+  cursor: pointer;
+}
+
+.naver img {
+  width: 320px;
 }

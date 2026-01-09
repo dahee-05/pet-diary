@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import diaryRouter from "./router/diaryRouter.js";
-// import memberRouter from "./router/memberRouter.js";
+import memberRouter from "./router/memberRouter.js";
 
 const app = express(); // express 서버 객체 생성
 const port = 9000;
@@ -15,7 +15,7 @@ app.post("/test", (req, res) => {
   res.json(req.body);
 });
 
-// app.use("/member", memberRouter);
+app.use("/member", memberRouter);
 app.use("/diary", diaryRouter);
 
 // express 서버 전원 버튼, 실제로 서버 실행

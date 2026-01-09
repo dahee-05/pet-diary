@@ -20,7 +20,7 @@ export default function TranslationPage() {
       .post("http://localhost:9000/diary/diarySave", item)
       .then((res) => {
         res.data.result_rows === 1
-          ? navigate("/")
+          ? navigate("/list")
           : alert("저장에 실패했습니다.");
       })
       .catch((error) => console.log(error));
