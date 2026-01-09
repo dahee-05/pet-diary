@@ -10,10 +10,6 @@ export default function TranslationPage() {
   const { diary } = location.state || {}; // undefined
   const [item, setItem] = useState(diary || {});
 
-  const hadleRetry = () => {
-    navigate("/write");
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
@@ -48,17 +44,11 @@ export default function TranslationPage() {
       />
       <div className={styles.btn}>
         <Button
-          type="button"
           value="다시하기"
-          onClick={hadleRetry}
+          onClick={() => navigate("/write")}
           className="retry"
         />
-        <Button
-          type="submit"
-          value="저장하기"
-          // onClick={handleSubmit}
-          className="diarySave"
-        />
+        <Button type="submit" value="저장하기" className="diarySave" />
       </div>
     </form>
   );

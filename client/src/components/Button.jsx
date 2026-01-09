@@ -2,19 +2,16 @@ import { useState } from "react";
 import styles from "../css/Button.module.css";
 
 export default function Button({
-  type,
-  value,
-  onClick,
+  type = "button",
   active,
   opacity,
+  value,
   className,
   ...rest
 }) {
   return (
     <button
       type={type}
-      value={value}
-      onClick={() => onClick?.(value)}
       className={`${styles[className]}
       ${active ? styles.active : ""}
       ${opacity ? styles.opacity : ""}

@@ -8,10 +8,6 @@ export default function DiaryList() {
   const navigate = useNavigate();
   const [list, setList] = useState([]);
 
-  const handleClick = async () => {
-    navigate("/write");
-  };
-  ``;
   const truncate = (str, n) => {
     return str?.length > n ? str.slice(0, n) + "..." : str;
   };
@@ -63,9 +59,8 @@ export default function DiaryList() {
       </div>
       <div className={styles.btn}>
         <Button
-          type="button"
           value="일 기 쓰 기"
-          onClick={handleClick}
+          onClick={() => navigate("/write")}
           className="createDiary"
         />
       </div>
