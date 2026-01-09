@@ -55,17 +55,17 @@ export default function DiaryWritePage() {
       <div className={styles.btn}>
         <Button
           value="강아지"
-          onClick={() => handleTypeClick("강아지")}
           active={diary.type === "강아지"}
           opacity={diary.type === "고양이"}
           className="writeBtn"
+          onClick={() => handleTypeClick("강아지")}
         />
         <Button
           value="고양이"
-          onClick={() => handleTypeClick("고양이")}
           active={diary.type === "고양이"}
           opacity={diary.type === "강아지"}
           className="writeBtn"
+          onClick={() => handleTypeClick("고양이")}
         />
       </div>
       <Button
