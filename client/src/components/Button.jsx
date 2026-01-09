@@ -5,6 +5,7 @@ export default function Button({
   type = "button",
   active,
   opacity,
+  disabled,
   value,
   className,
   ...rest
@@ -12,10 +13,11 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`${styles[className]}
+      className={`
+      ${styles[className]}
       ${active ? styles.active : ""}
       ${opacity ? styles.opacity : ""}
-      ${rest.disabled ? styles.opacity : styles.opaque}`}
+      ${disabled ? styles.opacity : styles.opaque}`}
       {...rest}
     >
       {value}
