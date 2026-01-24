@@ -26,7 +26,7 @@ CREATE TABLE `member` (
 --
 LOCK TABLES `member` WRITE;
 INSERT INTO `member` VALUES 
-('test1','1111','홍길동','01012345678','kimdahee42','@gmail.com', NULL,NULL, NULL, '2025-03-26 18:14:27'),
+('test1','1111','홍길동','01012345678','kim00','@gmail.com', NULL,NULL, NULL, '2025-03-26 18:14:27'),
 ('test2','1111','오어진','01012345678','rabbit0000','@gmail.com', NULL,NULL, NULL, '2025-03-26 19:14:27'),
 ('test3','1111','김다희','01012345678','aaaa12','@gmail.com', NULL,NULL, NULL, '2025-03-26 20:14:27'),
 ('test4','1111','오땡진','01012345678','abc1234','@gmail.com', NULL,NULL, NULL, '2025-03-26 18:14:28');
