@@ -1,0 +1,47 @@
+.writeBtn,
+.submitBtn,
+.createDiary,
+.retry,
+.diarySave {
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  border: 2px solid rgb(232, 214, 223);
+  background-color: rgb(232, 214, 223);
+}
+
+.active,
+.writeBtn:hover,
+.opaque:hover {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(146, 7, 77);
+  border: none;
+  border: 2px solid rgb(146, 7, 77);
+}
+
+.opacity {
+  opacity: 0.4;
+}
+
+.writeBtn {
+  padding: 10px 20px;
+}
+
+.submitBtn {
+  padding: 10px 75px;
+}
+
+.createDiary {
+  padding: 15px 50px;
+  width: 740px;
+}
+
+.retry,
+.diarySave {
+  padding: 10px 50px;
+  border-radius: 50px;
+}

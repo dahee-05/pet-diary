@@ -4,7 +4,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: 1px solid green; */
+}
+
+.img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 25px;
+  border: none;
+  border-radius: 100%;
+  background-color: rgb(208, 211, 211);
 }
 
 .textArea {
@@ -17,18 +25,8 @@
   outline: none;
 }
 
-.info {
-  width: 68%;
-  text-align: right;
-  font-size: 13px;
-}
-
-.isCounting {
-  color: red;
-}
-
 .btn {
   display: flex;
   gap: 10px;
-  margin: 10px;
+  margin: 40px 20px;
 }
