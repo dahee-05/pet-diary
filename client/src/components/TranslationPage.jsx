@@ -6,9 +6,9 @@ import styles from "../css/TranslationPage.module.css";
 
 export default function TranslationPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const location = useLocation();
   const { diary } = location.state || {}; // undefined
-  const queryClient = useQueryClient();
 
   const { data: item = [] } = useQuery({
     queryKey: ["openai", diary],
