@@ -1,38 +1,35 @@
-import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
-import styles from "../css/TranslationPage.module.css";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getOpenAI, diarySave } from "../service/api.js";
 import Button from "./Button.jsx";
+import styles from "../css/TranslationPage.module.css";
 
 export default function TranslationPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { diary } = location.state || {}; // undefined
-  const [item, setItem] = useState(diary || {});
+  const queryClient = useQueryClient();
+
+  const { data: item = [] } = useQuery({
+    queryKey: ["openai", diary],
+    queryFn: () => getOpenAI(diary),
+  });
+
+  const uploadMutation = useMutation({
+    mutationFn: (item) => diarySave(item),
+    onSuccess: () => {
+      navigate("/");
+      queryClient.invalidateQueries({ queryKey: ["list"] });
+    },
+    onError: () => {
+      alert("저장에 실패했습니다. 다시 시도해주세요.");
+    },
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .post("http://localhost:9000/diary/diarySave", item)
-      .then((res) => {
-        res.data.result_rows === 1
-          ? navigate("/")
-          : alert("저장에 실패했습니다.");
-      })
-      .catch((error) => console.log(error));
+    uploadMutation.mutate(item);
   };
-
-  useEffect(() => {
-    const fetchOpenAI = async () => {
-      const result = await axios
-        .post("http://localhost:9000/diary/openaiApi", item)
-        .then((res) => {
-          setItem((prev) => ({ ...prev, otherMessage: res.data }));
-        })
-        .catch((error) => console.log(error));
-    };
-    fetchOpenAI();
-  }, []);
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>

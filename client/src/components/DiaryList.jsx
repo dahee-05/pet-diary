@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/DiaryList.module.css";
 import Button from "./Button.jsx";
-import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { getList } from "../service/api.js";
 
 export default function DiaryList() {
   const navigate = useNavigate();
-  const [list, setList] = useState([]);
+
+  const { data: list = [], isSuccess } = useQuery({
+    queryKey: ["list"],
+    queryFn: getList,
+  });
+
+  // if (isSuccess) console.log(list);
 
   const truncate = (str, n) => {
     return str?.length > n ? str.slice(0, n) + "..." : str;
@@ -25,18 +31,6 @@ export default function DiaryList() {
       `${pad(d.getSeconds())}`
     );
   };
-
-  useEffect(() => {
-    axios
-      .post("http://localhost:9000/diary/diaryList")
-      .then((res) => {
-        const sortList = [...res.data].sort(
-          (a, b) => new Date(b.date) - new Date(a.date)
-        );
-        setList(sortList);
-      })
-      .catch((error) => console.log(error));
-  }, []);
 
   return (
     <div className={styles.listContainer}>

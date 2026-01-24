@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.module.css";
 import Layout from "./components/Layout.jsx";
 import DiaryList from "./components/DiaryList.jsx";
 import DiaryWrite from "./components/DiaryWrite.jsx";
