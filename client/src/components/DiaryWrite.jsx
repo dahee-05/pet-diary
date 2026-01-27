@@ -40,9 +40,17 @@ export default function DiaryWritePage() {
     setDiary((prev) => ({ ...prev, newDiary }));
     navigate("/trans", { state: { diary: newDiary } });
   };
-
+  const handleClick = () => {
+    navigate("/");
+  };
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
+      <Button
+        type="button"
+        value="Home"
+        className="homebtn"
+        onClick={() => handleClick()}
+      />
       <textarea
         className={styles.textArea}
         ref={textRef}

@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getOpenAI, diarySave } from "../service/api.js";
+import { useOpenAIDiary, useSaveDiary } from "../service/useDairy.js";
 import Button from "./Button.jsx";
 import styles from "../css/TranslationPage.module.css";
 
@@ -8,27 +7,20 @@ export default function TranslationPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { diary } = location.state || {}; // undefined
-  const queryClient = useQueryClient();
 
-  const { data: item = [] } = useQuery({
-    queryKey: ["openai", diary],
-    queryFn: () => getOpenAI(diary),
-  });
-
-  const uploadMutation = useMutation({
-    mutationFn: (item) => diarySave(item),
-    onSuccess: () => {
-      navigate("/");
-      queryClient.invalidateQueries({ queryKey: ["list"] });
-    },
-    onError: () => {
-      alert("저장에 실패했습니다. 다시 시도해주세요.");
-    },
-  });
+  const { data: item = [] } = useOpenAIDiary(diary);
+  const saveDiary = useSaveDiary();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    uploadMutation.mutate(item);
+    saveDiary.mutate(item, {
+      onSuccess: () => {
+        navigate("/");
+      },
+      onError: () => {
+        alert("저장에 실패했습니다. 다시 시도해주세요.");
+      },
+    });
   };
 
   return (

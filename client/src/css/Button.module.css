@@ -1,5 +1,6 @@
 .writeBtn,
 .submitBtn,
+.homebtn,
 .createDiary,
 .retry,
 .diarySave {
@@ -44,4 +45,11 @@
 .diarySave {
   padding: 10px 50px;
   border-radius: 50px;
+}
+
+.homebtn {
+  align-self: flex-end;
+  margin-right: 120px;
+  margin-bottom: 5px;
+  padding: 5px;
 }

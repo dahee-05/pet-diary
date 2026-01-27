@@ -1,18 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useDiaryList } from "../service/useDairy.js";
 import styles from "../css/DiaryList.module.css";
 import Button from "./Button.jsx";
-import { useQuery } from "@tanstack/react-query";
-import { getList } from "../service/api.js";
 
 export default function DiaryList() {
   const navigate = useNavigate();
 
-  const { data: list = [], isSuccess } = useQuery({
-    queryKey: ["list"],
-    queryFn: getList,
-  });
-
-  // if (isSuccess) console.log(list);
+  const { data: list = [], isSuccess } = useDiaryList();
 
   const truncate = (str, n) => {
     return str?.length > n ? str.slice(0, n) + "..." : str;
